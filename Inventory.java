@@ -89,6 +89,7 @@ public class Inventory {
 	
 
 	/**
+
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
@@ -222,7 +223,7 @@ public class Inventory {
         	          model.addRow(row1);
         	             
         	    	 
-        	    		  System.out.println(row1);
+        	    		//  System.out.println(row1);
         	  //  }
         	      i++; 
         	    }
@@ -295,7 +296,7 @@ public class Inventory {
 		    	        //JButton btnAdd = new JButton("Add");
 		    	        JButton btnDelete = new JButton("Delete");
 		    	        JButton btnUpdate = new JButton("Update");
-		    	      JButton btnCancel = new JButton("Cancel");
+		    	        JButton btnCancel = new JButton("Cancel");
 		    	      
 		    	        
 		    	        textId.setBounds(117, 12, 100, 25);
@@ -668,7 +669,7 @@ public class Inventory {
 	    	        
 	    	        // create JButtons
 	    	        JButton btnAdd = new JButton("Add");
-	    	        //JButton btnDelete = new JButton("Delete");
+	    	        JButton btnClear = new JButton("Clear");
 	    	       // JButton btnUpdate = new JButton("Update");
 	    	        //JButton btnUpdate = new JButton("Update");
 	    	        JButton btnCancel = new JButton("Cancel");
@@ -680,8 +681,8 @@ public class Inventory {
 	    	        textAge.setBounds(117, 188, 100, 25);
 	    	        
 	    	        btnAdd.setBounds(150, 265, 100, 25);
-	    	       // btnUpdate.setBounds(155, 265, 100, 25);
-	    	      //  btnDelete.setBounds(280, 265, 100, 25);
+	    	        //btnUpdate.setBounds(1305, 265, 100, 25);
+	    	       btnClear.setBounds(20, 265, 100, 25);
 	    	        btnCancel.setBounds(300, 265, 100, 25);
 	    	        
 	    	        frame.getContentPane().setLayout(null);
@@ -694,7 +695,7 @@ public class Inventory {
 	    	    
 	    	        // add JButtons to the jframe
 	    	        frame.getContentPane().add(btnAdd);
-	    	      //  frame.getContentPane().add(btnDelete);
+	    	       frame.getContentPane().add(btnClear);
 	    	   //     frame.getContentPane().add(btnUpdate);
 	    	        frame.getContentPane().add(btnCancel);
 	    	        
@@ -710,7 +711,7 @@ public class Inventory {
 	    	        lblNewLabel_2.setBounds(24, 128, 70, 15);
 	    	        frame.getContentPane().add(lblNewLabel_2);
 	    	        
-	    	        JLabel lblNewLabel_3 = new JLabel("Tax");
+	    	        JLabel lblNewLabel_3 = new JLabel("Tax (%)");
 	    	        lblNewLabel_3.setBounds(24, 193, 70, 15);
 	    	        frame.getContentPane().add(lblNewLabel_3);
 	    	        
@@ -739,7 +740,30 @@ public class Inventory {
 	    	        
 	    	        // create an array of objects to set the row data
 	    	        final Object[] row = new Object[8];
-	    	        
+	    	        //button clear row
+	    	        btnClear.addActionListener(new ActionListener(){
+
+	    	            @Override
+	    	            public void actionPerformed(ActionEvent e) {
+	    	            	textId.setText("");
+		    	            textFname.setText("");
+		    	            textLname.setText("");
+		    	            textAge.setText("");
+		    	            textField.setText("");
+		    	            textField_1.setText("");
+		    	            textField_2.setText("");
+		    	            textField_3.setText("");
+		    	            textId.setBackground(Color.WHITE);
+	  	            		  textFname.setBackground(Color.WHITE);
+	  	            		  textLname.setBackground(Color.WHITE);
+	  	            		  textAge.setBackground(Color.WHITE);
+	  	            		  textField.setBackground(Color.WHITE);
+	  	            		  textField_1.setBackground(Color.WHITE);
+	  	            		  textField_2.setBackground(Color.WHITE);
+	  	            		  textField_3.setBackground(Color.WHITE);
+	    	            }
+	    	        });
+	    	       
 	    	        // button add row
 	    	        btnAdd.addActionListener(new ActionListener(){
 
@@ -754,7 +778,7 @@ public class Inventory {
 	    	                row[5] = textField_1.getText();
 	    	                row[6] = textField_2.getText();
 	    	                row[7] = textField_3.getText();
-	    	                
+	    	             
 	    	                
 	    	                
 	    	                if (row[0].equals("")&& row[1].equals("") && row[2].equals("") && row[3].equals("") && row[4].equals("") && row[5].equals("") && row[6].equals("") && row[7].equals("") )
@@ -810,10 +834,16 @@ public class Inventory {
 	    	                	    textAge.setBackground(Color.RED);
 	    	                	    //Do NOT loop here.
 	    	                	}
+	    	            	    boolean match3;
+	    	            	    match3=((String) row[3]).matches("[0-9]+");
+	    	            	    if (match3==true){  //User have not entered anything. 
+	    	            	    	textAge.setBackground(Color.GREEN);
+	    	                  	}
+	    	            	    
 	    	                      else{
-	    	    					
+	    	                    	  JOptionPane.showMessageDialog(null,"Please Enter Numbers for Tax");
 	    	            	    	
-	    	            	    	textAge.setBackground(Color.GREEN);}                
+	    	            	    	textAge.setBackground(Color.RED);}                
 	    	            	    if (row[4].equals("")){  //User have not entered anything. 
 	    	                	  JOptionPane.showMessageDialog(null,"Please Enter Cost");
 	    	                	    textField.setBackground(Color.RED);
@@ -867,7 +897,7 @@ public class Inventory {
 	    	                  	}
 	    	            	
 	    	            	
-							if (!row[0].equals("")&& !row[1].equals("") && !row[2].equals("") && !row[3].equals("") && match==true && match1==true && !row[4].equals("") && !row[5].equals("") && !row[6].equals("") && ! row[7].equals("") )
+							if (!row[0].equals("")&& !row[1].equals("") && !row[2].equals("") && !row[3].equals("") && match3==true&& match==true && match1==true && !row[4].equals("") && !row[5].equals("") && !row[6].equals("") && ! row[7].equals("") )
 	                	    {
 	                	    row[0] = textId.getText();
 	                		row[1] = textFname.getText();
@@ -1141,7 +1171,7 @@ public class Inventory {
 	    			btnCancel.setBounds(501, 482, 117, 25);
 	    			panel.add(btnCancel);
 	    			
-	    			JButton btnRecordAndPrint = new JButton("Print");
+	    			JButton btnRecordAndPrint = new JButton("Order Stock");
 	    			btnRecordAndPrint.setBounds(245, 482, 165, 25);
 	    			panel.add(btnRecordAndPrint);
 	    			
@@ -1330,13 +1360,13 @@ public class Inventory {
 	    			        
 	    			        // create JTextFields
 	    			        final JTextField textId = new JTextField();
-	    			        textId.setToolTipText("Enter Item");
+	    			        textId.setToolTipText("Enter Supplier id");
 	    			        final JTextField textFname = new JTextField();
-	    			        textFname.setToolTipText("Enter Description");
+	    			        textFname.setToolTipText("Enter Name");
 	    			        final JTextField textLname = new JTextField();
-	    			        textLname.setToolTipText("Enter Tax");
+	    			        textLname.setToolTipText("Enter Address");
 	    			        final JTextField textAge = new JTextField();
-	    			        textAge.setToolTipText("Enter Category");
+	    			        textAge.setToolTipText("Enter Contact");
 	    			        
 	    			        try {
 	    	                	 
@@ -2402,20 +2432,20 @@ public class Inventory {
 	    	        recframe.getContentPane().add(panel, BorderLayout.CENTER);
 	    	        panel.setLayout(null);
 	    	        
-	    	        JButton btnPrint = new JButton("Print");
-	    	        btnPrint.setBounds(408, 319, 117, 25);
+	    	        JButton btnPrint = new JButton("Partial Received");
+	    	        btnPrint.setBounds(375, 319, 150, 25);
 	    	        panel.add(btnPrint);
 	    	        
-	    	        JButton btnCancel = new JButton("cancel");
+	    	        JButton btnCancel = new JButton("Cancel");
 	    	        btnCancel.setBounds(537, 319, 117, 25);
 	    	        panel.add(btnCancel);
 	    	        
-	    	        JButton btnOk = new JButton("OK");
+	    	        JButton btnOk = new JButton("Select");
 	    	        btnOk.setBounds(340, 65, 117, 25);
 	    	        panel.add(btnOk);
 	    	        
-	    	        JButton btnReceived = new JButton("Received");
-	    	        btnReceived.setBounds(257, 319, 117, 25);
+	    	        JButton btnReceived = new JButton("Fully Received");
+	    	        btnReceived.setBounds(200, 319, 150, 25);
 	    	        panel.add(btnReceived);
 	    	        
 	    	        JScrollPane scrollPane = new JScrollPane();
@@ -2526,8 +2556,11 @@ public class Inventory {
 
 			            @Override
 			            public void actionPerformed(ActionEvent e) {
+			            	if(rectable1.getRowCount()==0){
+			            	//	rectable1.removeRowSelectionInterval(0, rectable1.getRowCount()-1);
+			            	
 			            	   try {
-			 	    				
+			            		 //  rectable1.removeRowSelectionInterval(0, rectable1.getRowCount()-1);
 			 	                	  BufferedReader br1 = new BufferedReader(new FileReader("ordereditems.csv"));
 			 	                	    String line = null;
 			 	                	    
@@ -2573,8 +2606,59 @@ public class Inventory {
 			 	                    System.out.println(ex.getMessage());
 			 	                    ex.printStackTrace();
 			 	                }
-			            	
+			            	}
+			            	else{
+			            		modelrec.getDataVector().removeAllElements();
+			            	   try {
+			            		  // rectable1.removeRowSelectionInterval(0, rectable1.getRowCount()-1);
+			 	                	  BufferedReader br1 = new BufferedReader(new FileReader("ordereditems.csv"));
+			 	                	    String line = null;
+			 	                	    
+			 	                	   
+			 	                	   // @SuppressWarnings("rawtypes")
+			 	                		//Vector myVec = new Vector();
+			 	                	    while ((line = br1.readLine()) != null) {
+			 	                	    	
+				    	                	    	// if(index == 0) {
+				    	                              //   index++;
+				    	                                // continue; //skip first line
+				    	                         //     }
+				    	                	      String[] values = line.split(",");
+				    	                	      int i=1;
+				    	                	    
+				    	                	    //for ( String str : values) {
+				    	                	    	 
+				    	                	    	  
+				    	                	    		 
+				    	                	       row[i] = values;
+				    	                	       Object[]  row1 = (Object[])  row[i];
+				    	                	    	// str= myVec.add(str);
+				    	                	      if(row1[0].equals(comboBox.getSelectedItem())){
+				    	                	       
+				    	                	       modelrec.addRow(row1);}
+				    	                	       else{
+				    	                	   	   continue;
+				    	                	      }
+				    	                	   //      
+				    	                	    	 
+				    	                	    		 // System.out.println(row1[0]);
+				    	                	  //  }
+				    	                	          
+				    	                	      i++; 
+				    	                	    }
+				    	                	    
+			 	                	     // i++; 
+			 	                	    
+			 	                	    //}
+			 	                	    br1.close();
+			 	                	  
+			 	                } catch (IOException ex) {
+			 	                    System.out.println(ex.getMessage());
+			 	                    ex.printStackTrace();
+			 	                }
+			            	}
 			            }
+			            
 	    	        });
 	    	       
 	    	        btnCancel.addActionListener(new ActionListener(){
