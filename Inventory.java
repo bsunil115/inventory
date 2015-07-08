@@ -21,6 +21,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -72,7 +73,7 @@ public class Inventory {
 	private JPanel contentPane;
 	public JTextField textField,textField_1,textField_2,textField_3;
 	 private static final AtomicInteger counter = new AtomicInteger();
-	
+	 
 	JScrollPane scrollPane;
 	int age,age1,prod=0,prod1;
 	private JFrame frmStockOrder;
@@ -111,7 +112,7 @@ public class Inventory {
 	 * Create the application.
 	 */
 	public Inventory() {
-		
+		JDialog.setDefaultLookAndFeelDecorated(true);
 		initialize();
 	}
 
@@ -136,8 +137,9 @@ public class Inventory {
 					DefaultMutableTreeNode node_1;
 					node_1 = new DefaultMutableTreeNode("Items");
 						node_1.add(new DefaultMutableTreeNode("Add New Item"));
+						//node_1.add(new DefaultMutableTreeNode("Update"));
+						node_1.add(new DefaultMutableTreeNode("Delete"));
 						node_1.add(new DefaultMutableTreeNode("Find Item"));
-						//node_1.add(new DefaultMutableTreeNode("View Transfers"));
 						//node_1.add(new DefaultMutableTreeNode("Transfer Stock"));
 						//node_1.add(new DefaultMutableTreeNode("Import Items from Csv"));
 					add(node_1);
@@ -236,7 +238,7 @@ public class Inventory {
 		        
 		        
 		        final JPopupMenu popupMenu = new JPopupMenu();
-		        final JMenuItem updatedeleteItem = new JMenuItem("Update/Delete");
+		        final JMenuItem updatedeleteItem = new JMenuItem("Update");
 		        updatedeleteItem.addActionListener(new ActionListener() {
 		        	
 
@@ -244,22 +246,21 @@ public class Inventory {
 		            public void actionPerformed(ActionEvent e) {
 		               // JOptionPane.showMessageDialog(frame, "Right-click performed on table and choose DELETE");
 		            	 // create JFrame and JTable
-		    	        final JFrame frame = new JFrame();
+		    	        final JFrame upframe = new JFrame();
 		    	        
 		    	        // create a table model and set a Column Identifiers to this model 
 		    	     
 		    	        Font font1 = new Font("",1,22);	   
 		    	        
-		    	        
-		    	        
+		    	              
 		    	        
 		    	       
-		    	      
+		    	        
 		    	        
 		    	        // create JTextFields
-		    	        final JTextField textId = new JTextField();
-		    	        textId.setToolTipText("Enter Item");
-		    	        textId.setBounds(100, 15, 100, 25);
+		    	        final JTextField textId1 = new JTextField();
+		    	        textId1.setToolTipText("Enter Item");
+		    	        textId1.setBounds(100, 15, 100, 25);
 		    	        final JTextField textFname = new JTextField();
 		    	        textFname.setToolTipText("Enter Description");
 		    	        final JTextField textLname = new JTextField();
@@ -271,25 +272,25 @@ public class Inventory {
 		    	        textField = new JTextField();
 		    	        textField.setToolTipText("Enter Cost");
 		    	        textField.setBounds(371, 15, 100, 25);
-		    	        frame.getContentPane().add(textField);
+		    	        upframe.getContentPane().add(textField);
 		    	        textField.setColumns(10);
 		    	        
 		    	        textField_1 = new JTextField();
 		    	        textField_1.setToolTipText("Enter Price");
 		    	        textField_1.setBounds(371, 68, 100, 25);
-		    	        frame.getContentPane().add(textField_1);
+		    	        upframe.getContentPane().add(textField_1);
 		    	        textField_1.setColumns(10);
 		    	        
 		    	        textField_2 = new JTextField();
 		    	        textField_2.setToolTipText("Enter Location");
 		    	        textField_2.setBounds(371, 126, 100, 25);
-		    	        frame.getContentPane().add(textField_2);
+		    	        upframe.getContentPane().add(textField_2);
 		    	        textField_2.setColumns(10);
 		    	        
 		    	        textField_3 = new JTextField();
 		    	        textField_3.setToolTipText("Enter Quantity");
 		    	        textField_3.setBounds(371, 191, 100, 25);
-		    	        frame.getContentPane().add(textField_3);
+		    	        upframe.getContentPane().add(textField_3);
 		    	        textField_3.setColumns(10);
 		    	        
 		    	        // create JButtons
@@ -299,61 +300,61 @@ public class Inventory {
 		    	        JButton btnCancel = new JButton("Cancel");
 		    	      
 		    	        
-		    	        textId.setBounds(117, 12, 100, 25);
+		    	        textId1.setBounds(117, 12, 100, 25);
 		    	        textFname.setBounds(117, 65, 100, 25);
 		    	        textLname.setBounds(117, 123, 100, 25);
 		    	        textAge.setBounds(117, 188, 100, 25);
 		    	        
 		    	       // btnAdd.setBounds(150, 265, 100, 25);
 		    	        btnUpdate.setBounds(140, 265, 100, 25);
-		    	        btnDelete.setBounds(260, 265, 100, 25);
-		    	       btnCancel.setBounds(380, 265, 100, 25);
+		    	      //  btnDelete.setBounds(260, 265, 100, 25);
+		    	       btnCancel.setBounds(260, 265, 100, 25);
 		    	        
-		    	        frame.getContentPane().setLayout(null);
+		    	        upframe.getContentPane().setLayout(null);
 		    	        
 		    	        // add JTextFields to the jframe
-		    	        frame.getContentPane().add(textId);
-		    	        frame.getContentPane().add(textFname);
-		    	        frame.getContentPane().add(textLname);
-		    	        frame.getContentPane().add(textAge);
+		    	        upframe.getContentPane().add(textId1);
+		    	        upframe.getContentPane().add(textFname);
+		    	        upframe.getContentPane().add(textLname);
+		    	        upframe.getContentPane().add(textAge);
 		    	    
 		    	        // add JButtons to the jframe
 		    	      //  frame.getContentPane().add(btnAdd);
-		    	        frame.getContentPane().add(btnDelete);
-		    	        frame.getContentPane().add(btnUpdate);
+		    	        //upframe.getContentPane().add(btnDelete);
+		    	        upframe.getContentPane().add(btnUpdate);
 		    	  //      frame.getContentPane().add(btnCancel);
 		    	        
 		    	        JLabel lblNewLabel = new JLabel("Item");
 		    	        lblNewLabel.setBounds(24, 17, 70, 15);
-		    	        frame.getContentPane().add(lblNewLabel);
+		    	        upframe.getContentPane().add(lblNewLabel);
 		    	        
 		    	        JLabel lblNewLabel_1 = new JLabel("Description");
 		    	        lblNewLabel_1.setBounds(24, 70, 100, 15);
-		    	        frame.getContentPane().add(lblNewLabel_1);
+		    	        upframe.getContentPane().add(lblNewLabel_1);
 		    	        
 		    	        JLabel lblNewLabel_2 = new JLabel("Tax");
 		    	        lblNewLabel_2.setBounds(24, 128, 70, 15);
-		    	        frame.getContentPane().add(lblNewLabel_2);
+		    	        upframe.getContentPane().add(lblNewLabel_2);
 		    	        
 		    	        JLabel lblNewLabel_3 = new JLabel("Category");
 		    	        lblNewLabel_3.setBounds(24, 193, 70, 15);
-		    	        frame.getContentPane().add(lblNewLabel_3);
+		    	        upframe.getContentPane().add(lblNewLabel_3);
 		    	        
 		    	        JLabel lblNewLabel_4 = new JLabel("Cost");
 		    	        lblNewLabel_4.setBounds(253, 17, 70, 15);
-		    	        frame.getContentPane().add(lblNewLabel_4);
+		    	        upframe.getContentPane().add(lblNewLabel_4);
 		    	        
 		    	        JLabel lblNewLabel_5 = new JLabel("Price");
 		    	        lblNewLabel_5.setBounds(253, 70, 70, 15);
-		    	        frame.getContentPane().add(lblNewLabel_5);
+		    	        upframe.getContentPane().add(lblNewLabel_5);
 		    	        
 		    	        JLabel lblNewLabel_6 = new JLabel("Location");
 		    	        lblNewLabel_6.setBounds(253, 128, 70, 15);
-		    	        frame.getContentPane().add(lblNewLabel_6);
+		    	        upframe.getContentPane().add(lblNewLabel_6);
 		    	        
 		    	        JLabel lblNewLabel_7 = new JLabel("Quantity");
 		    	        lblNewLabel_7.setBounds(253, 193, 70, 15);
-		    	        frame.getContentPane().add(lblNewLabel_7);
+		    	        upframe.getContentPane().add(lblNewLabel_7);
 		    	   
 		    	        
 		    	        
@@ -458,7 +459,9 @@ public class Inventory {
 		    	            // i = the index of the selected row
 		    	            int i = table.getSelectedRow();
 		    	            //table.changeSelection(i, i, false, false);
-		    	            textId.setText(model.getValueAt(i, 0).toString());
+		    	            String x= model.getValueAt(i, 0).toString();
+		                       System.out.println("x is "+x);
+		    	            textId1.setText(model.getValueAt(i, 0).toString());
 		    	            textFname.setText(model.getValueAt(i, 1).toString());
 		    	            textLname.setText(model.getValueAt(i, 2).toString());
 		    	            textAge.setText(model.getValueAt(i, 3).toString());
@@ -481,7 +484,7 @@ public class Inventory {
 		    	                
 		    	                if(i >= 0) 
 		    	                {
-		    	                   model.setValueAt(textId.getText(), i, 0);
+		    	                   model.setValueAt(textId1.getText(), i, 0);
 		    	                   model.setValueAt(textFname.getText(), i, 1);
 		    	                   model.setValueAt(textLname.getText(), i, 2);
 		    	                   model.setValueAt(textAge.getText(), i, 3);
@@ -565,13 +568,13 @@ public class Inventory {
 		    	            @Override
 		    	            public void actionPerformed(ActionEvent e) {
 		    	          
-		    	            	frame.dispose();
+		    	            	upframe.dispose();
 		    	             
 		    	                }
 		    	        });
-		    	        frame.setTitle("Update/Delete Item");
-		    	        frame.getContentPane().add(btnCancel);
-		    	        /*JPanel bottompanel = new JPanel();
+		    	        upframe.setTitle("Update Item");
+		    	        upframe.getContentPane().add(btnCancel);
+		    	       /* JPanel bottompanel = new JPanel();
 		    	        frame.add(bottompanel, BorderLayout.NORTH);
 		    	        bottompanel.setVisible(true);
 		    	        bottompanel.setSize(500, 100);
@@ -581,9 +584,9 @@ public class Inventory {
 		    	        bottompanel.add(textId);
 		    	        bottompanel.add(lblNewLabel_1);
 		    	        bottompanel.add(textFname);*/
-		    	        frame.setSize(500,400);
-		    	        frame.setLocationRelativeTo(null);	    	       
-		    	        frame.setVisible(true);
+		    	        upframe.setSize(500,400);
+		    	        upframe.setLocationRelativeTo(null);	    	       
+		    	        upframe.setVisible(true);
 		    	        //selectedNode=null;
 		            }
 		        });
@@ -1009,6 +1012,361 @@ public class Inventory {
 	    	        frame.setVisible(true);
 	    	        selectedNode=null;
 	    		}
+	    	   
+	    	    if(selectedNodeName=="Update"){
+	    	    	
+	    	        final JFrame Udframe = new JFrame();
+	    	        
+	    	        // create a table model and set a Column Identifiers to this model 
+	    	     
+	    	        Font font1 = new Font("",1,22);	   
+	    	        
+	    	        
+	    	        
+	    	        
+	    	       
+	    	      
+	    	        
+	    	        // create JTextFields
+	    	        final JTextField textId = new JTextField();
+	    	        textId.setToolTipText("Enter Item");
+	    	        textId.setBounds(100, 15, 100, 25);
+	    	        final JTextField textFname = new JTextField();
+	    	        textFname.setToolTipText("Enter Description");
+	    	        final JTextField textLname = new JTextField();
+	    	        textLname.setToolTipText("Enter Tax");
+	    	        final JTextField textAge = new JTextField();
+	    	        textAge.setToolTipText("Enter Category");
+	    	        
+	    	        
+	    	        textField = new JTextField();
+	    	        textField.setToolTipText("Enter Cost");
+	    	        textField.setBounds(371, 15, 100, 25);
+	    	        Udframe.getContentPane().add(textField);
+	    	        textField.setColumns(10);
+	    	        
+	    	        textField_1 = new JTextField();
+	    	        textField_1.setToolTipText("Enter Price");
+	    	        textField_1.setBounds(371, 68, 100, 25);
+	    	        Udframe.getContentPane().add(textField_1);
+	    	        textField_1.setColumns(10);
+	    	        
+	    	        textField_2 = new JTextField();
+	    	        textField_2.setToolTipText("Enter Location");
+	    	        textField_2.setBounds(371, 126, 100, 25);
+	    	        Udframe.getContentPane().add(textField_2);
+	    	        textField_2.setColumns(10);
+	    	        
+	    	        textField_3 = new JTextField();
+	    	        textField_3.setToolTipText("Enter Quantity");
+	    	        textField_3.setBounds(371, 191, 100, 25);
+	    	        Udframe.getContentPane().add(textField_3);
+	    	        textField_3.setColumns(10);
+	    	        
+	    	        // create JButtons
+	    	        //JButton btnAdd = new JButton("Add");
+	    	        JButton btnDelete = new JButton("Delete");
+	    	        JButton btnUpdate = new JButton("Update");
+	    	        JButton btnCancel = new JButton("Cancel");
+	    	      
+	    	        
+	    	        textId.setBounds(117, 12, 100, 25);
+	    	        textFname.setBounds(117, 65, 100, 25);
+	    	        textLname.setBounds(117, 123, 100, 25);
+	    	        textAge.setBounds(117, 188, 100, 25);
+	    	        
+	    	       // btnAdd.setBounds(150, 265, 100, 25);
+	    	        btnUpdate.setBounds(140, 265, 100, 25);
+	    	        btnDelete.setBounds(260, 265, 100, 25);
+	    	       btnCancel.setBounds(260, 265, 100, 25);
+	    	        
+	    	       Udframe.getContentPane().setLayout(null);
+	    	        
+	    	        // add JTextFields to the jframe
+	    	       Udframe.getContentPane().add(textId);
+	    	       Udframe.getContentPane().add(textFname);
+	    	       Udframe.getContentPane().add(textLname);
+	    	       Udframe.getContentPane().add(textAge);
+	    	    
+	    	        // add JButtons to the jframe
+	    	      //  frame.getContentPane().add(btnAdd);
+	    	        //frame.getContentPane().add(btnDelete);
+	    	       Udframe.getContentPane().add(btnUpdate);
+	    	  //      frame.getContentPane().add(btnCancel);
+	    	        
+	    	        JLabel lblNewLabel = new JLabel("Item");
+	    	        lblNewLabel.setBounds(24, 17, 70, 15);
+	    	        Udframe.getContentPane().add(lblNewLabel);
+	    	        
+	    	        JLabel lblNewLabel_1 = new JLabel("Description");
+	    	        lblNewLabel_1.setBounds(24, 70, 100, 15);
+	    	        Udframe.getContentPane().add(lblNewLabel_1);
+	    	        
+	    	        JLabel lblNewLabel_2 = new JLabel("Tax");
+	    	        lblNewLabel_2.setBounds(24, 128, 70, 15);
+	    	        Udframe.getContentPane().add(lblNewLabel_2);
+	    	        
+	    	        JLabel lblNewLabel_3 = new JLabel("Category");
+	    	        lblNewLabel_3.setBounds(24, 193, 70, 15);
+	    	        Udframe.getContentPane().add(lblNewLabel_3);
+	    	        
+	    	        JLabel lblNewLabel_4 = new JLabel("Cost");
+	    	        lblNewLabel_4.setBounds(253, 17, 70, 15);
+	    	        Udframe.getContentPane().add(lblNewLabel_4);
+	    	        
+	    	        JLabel lblNewLabel_5 = new JLabel("Price");
+	    	        lblNewLabel_5.setBounds(253, 70, 70, 15);
+	    	        Udframe.getContentPane().add(lblNewLabel_5);
+	    	        
+	    	        JLabel lblNewLabel_6 = new JLabel("Location");
+	    	        lblNewLabel_6.setBounds(253, 128, 70, 15);
+	    	        Udframe.getContentPane().add(lblNewLabel_6);
+	    	        
+	    	        JLabel lblNewLabel_7 = new JLabel("Quantity");
+	    	        lblNewLabel_7.setBounds(253, 193, 70, 15);
+	    	        Udframe.getContentPane().add(lblNewLabel_7);
+	    	   
+	    	        
+	    	        
+	    	        
+	    	    
+	    	        
+	    	        
+	    	        
+	    	        // create an array of objects to set the row data
+	    	        final Object[] row = new Object[8];
+	    	        
+	    	   	    	        
+	    	        
+	    	     
+	    	        
+	    	        // get selected row data From table to textfields 
+	    	        table.addMouseListener(new MouseAdapter(){
+	    	        @Override
+	    	        public void mouseClicked(MouseEvent e){
+	    	            
+	    	            // i = the index of the selected row
+	    	            int i = table.getSelectedRow();
+	    	            //table.changeSelection(i, i, false, false);
+	    	           
+                       String x= model.getValueAt(i, 0).toString();
+                       System.out.println("x is "+x);
+                       textId.setText(model.getValueAt(i, 0).toString());
+	    	            textFname.setText(model.getValueAt(i, 1).toString());
+	    	            textLname.setText(model.getValueAt(i, 2).toString());
+	    	            textAge.setText(model.getValueAt(i, 3).toString());
+	    	            textField.setText(model.getValueAt(i, 4).toString());
+	    	            textField_1.setText(model.getValueAt(i, 5).toString());
+	    	            textField_2.setText(model.getValueAt(i, 6).toString());
+	    	            textField_3.setText(model.getValueAt(i, 7).toString());
+	    	        }
+	    	        });
+	    	        
+	    	        
+	    	        // button update row
+	    	        btnUpdate.addActionListener(new ActionListener(){
+
+	    	            @Override
+	    	            public void actionPerformed(ActionEvent e) {
+	    	             
+	    	                // i = the index of the selected row
+	    	                int i = table.getSelectedRow();
+	    	                
+	    	                if(i >= 0) 
+	    	                {
+	    	                   model.setValueAt(textId.getText(), i, 0);
+	    	                   model.setValueAt(textFname.getText(), i, 1);
+	    	                   model.setValueAt(textLname.getText(), i, 2);
+	    	                   model.setValueAt(textAge.getText(), i, 3);
+	    	                   model.setValueAt(textField.getText(), i, 4);
+	    	                   model.setValueAt(textField_1.getText(), i, 5);
+	    	                   model.setValueAt(textField_2.getText(), i, 6);
+	    	                   model.setValueAt(textField_3.getText(), i, 7);
+	    	                   
+	    	               	
+    	                    	BufferedWriter writer = null;
+    	                    	 OutputStreamWriter output;
+    	                    	 FileOutputStream filestream;
+    	                    	 BufferedReader br = null;
+    	                    	 
+    	                    	
+    	                DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+    	                int nRow = dtm.getRowCount();
+    	                int nCol = dtm.getColumnCount();
+    	                try {
+    	                	//  br = new BufferedReader(new FileReader("file.csv"));
+    	                	FileWriter fw = new FileWriter("itemslist.csv", false);
+    	                // BufferedWriter bw = new BufferedWriter(fw);
+    	                	  writer = new BufferedWriter(fw);
+    	              	//   String line;
+    	              //	  int index=0;
+    	              	    
+    	              	//  while ((line = br.readLine()) == null) {
+    	              	    	
+    	              //             if(line==null){
+    	                	
+
+    	                    //write the header information
+    	                   StringBuffer bufferHeader = new StringBuffer();
+    	                 
+    	                   for (int j =0; j < nCol; j++) {
+    	                      bufferHeader.append(dtm.getColumnName(j));
+    	                        if (j!=nCol) bufferHeader.append(", ");
+    	                    }
+    	                    //writer.write(bufferHeader.toString() + "\r\n");
+
+    	                   //write row information
+    	                    for (int i1 = 0 ; i1 < nRow ; i1++){
+    	                         StringBuffer buffer = new StringBuffer();
+    	                        for (int j = 0 ; j < nCol ; j++){
+    	                           buffer.append(dtm.getValueAt(i1,j));
+    	                           if (j!=nCol) buffer.append(", ");
+    	                        }
+    	                        writer.write(buffer.toString() + "\r");
+    	                    }JOptionPane.showMessageDialog(null,	" item updated " );}
+    	              // index++;line="ll"; }}
+    	                catch (UnsupportedEncodingException e3) {
+    	        			// TODO Auto-generated catch block
+    	        			e3.printStackTrace();
+    	        		} catch (FileNotFoundException e1) {
+    	        			// TODO Auto-generated catch block
+    	        			e1.printStackTrace();
+    	        		} catch (IOException e2) {
+    	        			// TODO Auto-generated catch block
+    	        			e2.printStackTrace();
+    	        		} finally {
+    	                      try {
+    	                    	  //br.close();
+    	        				//writer.close();
+    	        				writer.flush();
+    	        				writer.close();
+    	        			} catch (IOException e4) {
+    	        				// TODO Auto-generated catch block
+    	        				e4.printStackTrace();
+    	        			}
+    	                }
+	    	                }
+	    	                else{
+	    	                	 System.out.println("Update Error");
+	    	                }
+	    	            }
+	    	        });
+	    	        
+	    	        // button close window
+	    	        btnCancel.addActionListener(new ActionListener(){
+
+	    	            @Override
+	    	            public void actionPerformed(ActionEvent e) {
+	    	          
+	    	            	Udframe.dispose();
+	    	             
+	    	                }
+	    	        });
+	    	        Udframe.setTitle("Update Item");
+	    	        Udframe.getContentPane().add(btnCancel);
+	    	        /*JPanel bottompanel = new JPanel();
+	    	        frame.add(bottompanel, BorderLayout.NORTH);
+	    	        bottompanel.setVisible(true);
+	    	        bottompanel.setSize(500, 100);
+	    	        Border eBorder = BorderFactory.createEtchedBorder();
+	    	        bottompanel.setBorder(BorderFactory.createTitledBorder(eBorder, "General"));
+	    	        bottompanel.add(lblNewLabel);
+	    	        bottompanel.add(textId);
+	    	        bottompanel.add(lblNewLabel_1);
+	    	        bottompanel.add(textFname);*/
+	    	        Udframe.setSize(500,400);
+	    	        Udframe.setLocationRelativeTo(null);	    	       
+Udframe.setVisible(true);
+	    	        //selectedNode=null;
+	    	    }
+	    	    
+	    	    if(selectedNodeName=="Delete"){
+			       
+	    	    	// create JTextFields
+	    	        final JTextField textId = new JTextField();
+	    	        textId.setToolTipText("Enter Item");
+	    	        textId.setBounds(100, 15, 100, 25);
+	    	        final JTextField textFname = new JTextField();
+	    	        textFname.setToolTipText("Enter Description");
+	    	        final JTextField textLname = new JTextField();
+	    	        textLname.setToolTipText("Enter Tax");
+	    	        final JTextField textAge = new JTextField();
+	    	        textAge.setToolTipText("Enter Category");
+	    	    	 // get selected row data From table to textfields 
+	    	       
+	    	    	 // i = the index of the selected row
+	                int i = table.getSelectedRow();
+	                if(i >= 0){
+	                    // remove a row from jtable
+	                    model.removeRow(i);
+
+                    	BufferedWriter writer = null;
+                    	 OutputStreamWriter output;
+                    	 FileOutputStream filestream;
+                    	 BufferedReader br = null;
+                    	 
+                    	
+                DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+                int nRow = dtm.getRowCount();
+                int nCol = dtm.getColumnCount();
+                try {
+                	//  br = new BufferedReader(new FileReader("file.csv"));
+                	FileWriter fw = new FileWriter("itemslist.csv", false);
+                // BufferedWriter bw = new BufferedWriter(fw);
+                	  writer = new BufferedWriter(fw);
+              	//   String line;
+              //	  int index=0;
+              	    
+              	//  while ((line = br.readLine()) == null) {
+              	    	
+              //             if(line==null){
+                	
+
+                    //write the header information
+                   StringBuffer bufferHeader = new StringBuffer();
+                 
+                   for (int j =0; j < nCol; j++) {
+                      bufferHeader.append(dtm.getColumnName(j));
+                        if (j!=nCol) bufferHeader.append(",");
+                    }
+                    //writer.write(bufferHeader.toString() + "\r\n");
+
+                   //write row information
+                    for (int i1 = 0 ; i1 < nRow ; i1++){
+                         StringBuffer buffer = new StringBuffer();
+                        for (int j = 0 ; j < nCol ; j++){
+                           buffer.append(dtm.getValueAt(i1,j));
+                           if (j!=nCol) buffer.append(",");
+                        }
+                        writer.write(buffer.toString() + "\r");
+                    }JOptionPane.showMessageDialog(null,	" item deleted " );}
+              // index++;line="ll"; }}
+                catch (UnsupportedEncodingException e3) {
+        			// TODO Auto-generated catch block
+        			e3.printStackTrace();
+        		} catch (FileNotFoundException e1) {
+        			// TODO Auto-generated catch block
+        			e1.printStackTrace();
+        		} catch (IOException e2) {
+        			// TODO Auto-generated catch block
+        			e2.printStackTrace();
+        		} finally {
+                      try {
+                    	  //br.close();
+        				//writer.close();
+        				writer.flush();
+        				writer.close();
+        			} catch (IOException e4) {
+        				// TODO Auto-generated catch block
+        				e4.printStackTrace();
+        			}
+                }
+	                }
+	                else{
+	                    JOptionPane.showInputDialog(null, "please select item to delete");
+	                }
+	               // frame.dispose();
+	    	    }
 	    	    if(selectedNodeName=="Find Item"){
 	    	    	
 	    	    	//JOptionPane.showMessageDialog(null,	" Find Item node selected " );
@@ -1050,21 +1408,21 @@ public class Inventory {
 	    	            @Override
 	    	            public void actionPerformed(ActionEvent e) {
 	    	            	
-	    	            	
+	    	            	int c=0;
 	    	            	String findvalue = searchTextField.getText();
 	    	            	if((findvalue.isEmpty())){
 	    	            		JOptionPane.showMessageDialog(null,"please enter item to search");}
 	    	            	else{
 	    	            	
 	    	            	if(!(findvalue.isEmpty())){
-	    	            		System.out.println("if:"+findvalue);
+	    	            		//System.out.println("if:"+findvalue);
 	    	            		for(int i = 0; i < table.getRowCount(); i++){//For each row
 	    	            	       // for(int j = 0; j < table.getColumnCount(); j++){//For each column in that row
 	    	            			//System.out.println(model.getValueAt(i, 0));
 	    	            	            if(model.getValueAt(i, 0).equals(findvalue)){//Search the model
 	    	            	                //System.out.println(table.getModel().getValueAt(i, j));//Print if found string
 	    	            	               // System.out.println("Search found");
-	    	            	            	
+	    	            	            	c=1;
 	    	            	            	table.changeSelection(i, 0, false, false);
 	    	            	               // JOptionPane.showMessageDialog(null,	" Search Item is found " );
 	    	            	           
@@ -1077,8 +1435,8 @@ public class Inventory {
 	    	            		
 	    	            	}
 	    	            	
-	    	            else{
-	    	            //	System.out.println("else:"+findvalue);
+	    	            	if(c==0){
+	    	            	System.out.println("else:"+findvalue);
 	    	            	JOptionPane.showMessageDialog(null,"Search Item is not found");}
 	    	            	
 	    	            }}
@@ -1273,7 +1631,7 @@ public class Inventory {
 	    					return columnEditables[column];
 	    				}
 	    			});*/
-	    			 Object[] columns1 = {"Quantity", "Item", "Description", "Tax", "Unit value", "Line Total", "Measure"};
+	    			 Object[] columns1 = {"Quantity", "Item", "Description", "Tax", "Unit value", "Line Total"};
 	    			final DefaultTableModel model1 = new DefaultTableModel();
 			       model1.setColumnIdentifiers(columns1);
 			       table1.setModel(model1);
@@ -1588,7 +1946,7 @@ public class Inventory {
 		    	                 
 		    	                   for (int j =0; j < nCol; j++) {
 		    	                      bufferHeader.append(dtm.getColumnName(j));
-		    	                        if (j!=nCol) bufferHeader.append(", ");
+		    	                        if (j!=nCol) bufferHeader.append(",");
 		    	                    }
 		    	                    //writer.write(bufferHeader.toString() + "\r\n");
 
@@ -2238,7 +2596,7 @@ public class Inventory {
 	    	        final JFrame recframe = new JFrame();
 	    	        
 	    	        // create a table model and set a Column Identifiers to this model 
-	    	       Object[] columns = {"order-id","Quantity", "Item", "Description", "Tax", "Unit value", "Line Total", "Measure"};
+	    	       Object[] columns = {"order-id","Quantity", "Item", "Description", "Tax", "Unit value", "Line Total"};
 	    	        final DefaultTableModel model1 = new DefaultTableModel();
 	    	        model1.setColumnIdentifiers(columns);
 	    	        
@@ -2453,7 +2811,7 @@ public class Inventory {
 	    	        panel.add(scrollPane);
 	    	        
 	    	        rectable1 = new JTable();
-	    	        final Object[] columns = {"order-id","Quantity", "Item", "Description", "Tax", "Unit value", "Line Total", "Measure"};
+	    	        final Object[] columns = {"order-id","Quantity", "Item", "Description", "Tax", "Unit value", "Line Total"};
 	    	        final DefaultTableModel modelrec = new DefaultTableModel();
 	    	        modelrec.setColumnIdentifiers(columns);
 	    	        scrollPane.setViewportView(rectable1);
@@ -2683,65 +3041,141 @@ public class Inventory {
 	    	        DefaultTableModel dtm = (DefaultTableModel) rectable1.getModel();
 	    	        int nRow = dtm.getRowCount();
 	    	        int nCol = dtm.getColumnCount();
-	    	        
-	    	        try {
-	    	        	//  br = new BufferedReader(new FileReader("file.csv"));
-	    	        	FileWriter fw = new FileWriter("orderid.csv", false);
-	    	        // BufferedWriter bw = new BufferedWriter(fw);
-	    	        	  writer = new BufferedWriter(fw);
-	    	      	//   String line;
-	    	      //	  int index=0;
-	    	      	    
-	    	      	//  while ((line = br.readLine()) == null) {
-	    	      	    	
-	    	      //             if(line==null){
-	    	        	
+	    	       
+	    	       
+	    	        int response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
+	    	            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+	    	        if (response == JOptionPane.NO_OPTION) {
+	    	        	System.out.println("No button clicked");
+	    	        }
+	    	        else if (response == JOptionPane.CLOSED_OPTION) {
+	    	            System.out.println("JOptionPane closed");
+	    	          }
+	    	        else if (response == JOptionPane.YES_OPTION) {
+	    	        	 
+		    	        try {
+		    	        	//  br = new BufferedReader(new FileReader("file.csv"));
+		    	        	FileWriter fw = new FileWriter("orderid.csv", false);
+		    	        // BufferedWriter bw = new BufferedWriter(fw);
+		    	        	  writer = new BufferedWriter(fw);
+		    	      	//   String line;
+		    	      //	  int index=0;
+		    	      	    
+		    	      	//  while ((line = br.readLine()) == null) {
+		    	      	    	
+		    	      //             if(line==null){
+		    	        	
 
-	    	            //write the header information
-	    	        	   
-	    	        	  
-	    	        	for(int i=1;i<comboBox.getItemCount();i++)
-	    	        		if(comboBox.getItemAt(i)==comboBox.getSelectedItem())
-	    	        	 		    	        	   
-	    	        	    	continue;
-	    	        		else{
-	    	        			
-	    	        			writer.write( comboBox.getItemAt(i).toString());
-	    	        			 writer.newLine();
-	    	        		}
-	                	  
-	                	 // writers.write();
-	                	//  writers.newLine();
-	                	 // writer.newLine();
-	                	//  writer.write("Purchase Order id\t"+comboBox.getSelectedItem());
-	                	 // writers.newLine();
-	                	 // writers.write();
-	                	 
-	                	//  writer.newLine();
-	                	  
-	                	 
-	    	          JOptionPane.showMessageDialog(null,"File Saved" );}	
-	    	        catch (UnsupportedEncodingException e1) {
-	    				// TODO Auto-generated catch block
-	    				e1.printStackTrace();
-	    			} catch (FileNotFoundException e1) {
-	    				// TODO Auto-generated catch block
-	    				e1.printStackTrace();
-	    			} catch (IOException e1) {
-	    				// TODO Auto-generated catch block
-	    				e1.printStackTrace();
-	    			} finally {
-	    	              try {
-	    	            	  //br.close();
-	    					//writer.close();
-	    					writer.flush();
-	    					writer.close();
-	    				} catch (IOException e1) {
-	    					// TODO Auto-generated catch block
-	    					e1.printStackTrace();
-	    				}
-	    			}
-			            	
+		    	            //write the header information
+		    	        	   
+		    	        	  
+		    	        	for(int i=1;i<comboBox.getItemCount();i++)
+		    	        		if(comboBox.getItemAt(i)==comboBox.getSelectedItem())
+		    	        	 		    	        	   
+		    	        	    	continue;
+		    	        		else{
+		    	        			
+		    	        			writer.write( comboBox.getItemAt(i).toString());
+		    	        			 writer.newLine();
+		    	        		}
+		                	  
+		                	 // writers.write();
+		                	//  writers.newLine();
+		                	 // writer.newLine();
+		                	//  writer.write("Purchase Order id\t"+comboBox.getSelectedItem());
+		                	 // writers.newLine();
+		                	 // writers.write();
+		                	 
+		                	//  writer.newLine();
+		                	  
+		                	 
+		    	          JOptionPane.showMessageDialog(null,"Item Fully Received" );}	
+		    	        catch (UnsupportedEncodingException e1) {
+		    				// TODO Auto-generated catch block
+		    				e1.printStackTrace();
+		    			} catch (FileNotFoundException e1) {
+		    				// TODO Auto-generated catch block
+		    				e1.printStackTrace();
+		    			} catch (IOException e1) {
+		    				// TODO Auto-generated catch block
+		    				e1.printStackTrace();
+		    			} finally {
+		    	              try {
+		    	            	  //br.close();
+		    					//writer.close();
+		    					writer.flush();
+		    					writer.close();
+		    				} catch (IOException e1) {
+		    					// TODO Auto-generated catch block
+		    					e1.printStackTrace();
+		    				}
+		    			}
+		    	    	
+	        try {
+	        	//  br = new BufferedReader(new FileReader("file.csv"));
+	        	FileWriter fw = new FileWriter("ReceivedStock.csv", false);
+	        // BufferedWriter bw = new BufferedWriter(fw);
+	        	  writer = new BufferedWriter(fw);
+	      	//   String line;
+	      //	  int index=0;
+	      	    
+	      	//  while ((line = br.readLine()) == null) {
+	      	    	
+	      //             if(line==null){
+	        	
+
+	            //write the header information
+	        	   
+	        	  
+	        	
+           	  
+           	 // writers.write();
+           	//  writers.newLine();
+           	  writer.newLine();
+           	  writer.write("Purchase Order id\t"+comboBox.getSelectedItem());
+           	 // writers.newLine();
+           	 // writers.write();
+           	  writer.newLine();
+           	  writer.newLine();
+           	 
+	           StringBuffer bufferHeader = new StringBuffer();
+	         
+	           for (int j =0; j < nCol; j++) {
+	              bufferHeader.append(dtm.getColumnName(j));
+	                if (j!=nCol) bufferHeader.append(", ");
+	            }
+	           writer.write(bufferHeader.toString() + "\r\n");
+
+	           //write row information
+	            for (int i = 0 ; i < nRow ; i++){
+	                 StringBuffer buffer = new StringBuffer();
+	                for (int j = 0 ; j < nCol ; j++){
+	                   buffer.append(dtm.getValueAt(i,j));
+	                   if (j!=nCol) buffer.append(",");
+	                }
+	                writer.write(buffer.toString() + "\r");
+	            }JOptionPane.showMessageDialog(null,"File Saved to print : ReceivedStock.csv" );}	
+	        catch (UnsupportedEncodingException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} finally {
+	              try {
+	            	  //br.close();
+					//writer.close();
+					writer.flush();
+					writer.close();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+	            	
+			}   	}
 			            }
 	    	        });
 	    	        
@@ -2764,6 +3198,17 @@ public class Inventory {
 	    	        });
 	    	        btnPrint.addActionListener(new ActionListener() {
 	    	            public void actionPerformed(ActionEvent e) {
+	    	            	 JDialog.setDefaultLookAndFeelDecorated(true);
+	    		    	        int response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
+	    		    	            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+	    		    	        if (response == JOptionPane.NO_OPTION) {
+	    		    	        	System.out.println("No button clicked");
+	    		    	        }
+	    		    	        else if (response == JOptionPane.CLOSED_OPTION) {
+	    		    	            System.out.println("JOptionPane closed");
+	    		    	          }
+	    		    	        else if (response == JOptionPane.YES_OPTION) {
+	    		    	        	 
 	    	            	
 	    	            	BufferedWriter writer = null;
 	    	            	 OutputStreamWriter output;
@@ -2840,7 +3285,7 @@ public class Inventory {
 	    				}
 	    	            	
 	    	            	
-	    			}	
+	    			}	}
 	    	            }
 	    	        });
 	    	       
